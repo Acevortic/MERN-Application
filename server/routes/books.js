@@ -1,6 +1,7 @@
 import express from "express";
+import Book from "../index.js";
 
-// This help convert the id from string to ObjectId for the _id.
+// This helps convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
 
 // router is an instance of the express router.
@@ -13,7 +14,7 @@ router.get('/availablebooks', async (req, res) => {
         const available = await Book.find({"checkedout": false});
         res.json(available);
     } catch (err) {
-        res.status(500).json({ msg: "Error fetching available books", error: err });
+        res.status(500).json({ msg: "Errors fetching available books", error: err });
     }
 });
 
@@ -40,7 +41,7 @@ router.get('/checkout', async (req, res) => {
     }
 });
 
-app.get('/checkin', async (req, res) => {
+router.get('/checkin', async (req, res) => {
     try {
         const checkin = await Book.findByIdAndUpdate("66f826eff369ac59899f442a", 
             {"checkedout": false, 
@@ -54,4 +55,4 @@ app.get('/checkin', async (req, res) => {
     }
 });
 
-export default book;
+export default router;
