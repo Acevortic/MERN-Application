@@ -3,6 +3,7 @@ import react, {useState} from 'react';
 function CheckinBook() {
     const [bookTitle, setBookTitle] = useState('');
     const [loading, setLoading] = useState(false);
+    const [books, setBooks] = useState([]);
 
     const fetchCheckinBook = async () => {
     try {
@@ -28,6 +29,7 @@ function CheckinBook() {
         const handleSubmit = (e) => {
         e.preventDefault(); // Prevent the default form submission
         fetchCheckinBook(); // Fetch the book data
+        setBookTitle('');
     };
 
     return (
@@ -51,7 +53,6 @@ function CheckinBook() {
             <button type="submit" className="btn btn-primary">
                 {loading ? 'Checking out...' : 'Submit'} {/* Show loading state */}
             </button>
-            
             </form>
         </div>
 

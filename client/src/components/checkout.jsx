@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import AvailableBooks from './availablebooks';
 
 function CheckoutBook() {
   const [bookTitle, setBookTitle] = useState(''); // State for the book title input
   const [userId, setuserId] = useState('');
   const [books, setBooks] = useState([]); // State for the list of books
   const [loading, setLoading] = useState(false); // State for loading indicator
+  const [newDueDate, setnewDueDate] = useState(new Date());
 
   // Function to fetch book data from the server
   const fetchCheckoutBook = async () => {
@@ -17,9 +17,10 @@ function CheckoutBook() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId, bookTitle })
+            body: JSON.stringify({ userId, bookTitle, newDueDate })
         }
       );
+      
       const data = await response.json();
       setBooks(data); // Set the books state with the response data
     } catch (error) {
@@ -33,6 +34,14 @@ function CheckoutBook() {
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
     fetchCheckoutBook(); // Fetch the book data
+
+    const newDueDate = new Date();
+    newDueDate.setDate(newDueDate.getDate() + 14); // Add 14 days (2 weeks)
+    setnewDueDate(newDueDate);
+    console.log("Book's due date is: " + newDueDate);
+
+    setBookTitle('');
+    setuserId('');
   };
 
   return (

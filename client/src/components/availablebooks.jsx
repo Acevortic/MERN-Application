@@ -17,7 +17,6 @@ function AvailableBooks() {
           }
         }
 
-
 return (
     <div>
         <h1>Available book list:</h1>
