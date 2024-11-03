@@ -24,8 +24,9 @@ function CheckedoutBooks() {
             <button onClick={fetchCheckedoutBooks}> Show checkedoutbooks</button>
             <ul>
         {books.map((book, index) => (
-          <li key={index}>
-            <strong> Title: {book.title}</strong> <strong>Author:</strong> {book.author} <strong>Due by:</strong> {book.duedate}
+          <li key={index} style = {{marginBottom: '15px'}}>
+            <strong> Book's Title: </strong>  {book.title}<br /> <strong> Author: </strong> {book.author} <br /> <strong> Due by: </strong> {book.duedate} <br /> 
+               <strong> CheckedOutBy: </strong>  {book.checkedoutby} 
           </li>
         ))}
       </ul>

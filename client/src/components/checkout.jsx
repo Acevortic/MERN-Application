@@ -8,8 +8,9 @@ function CheckoutBook() {
   const [newDueDate, setnewDueDate] = useState(new Date());
 
   // Function to fetch book data from the server
-  const fetchCheckoutBook = async () => {
+  const fetchCheckoutBook = async (newDueDate) => {
     setLoading(true); // Start loading
+   // console.log("Book's new due date is: " + newDueDate);
     try {
       const response = await fetch(`http://localhost:3000/books/checkout?`,
         {
@@ -17,7 +18,7 @@ function CheckoutBook() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ userId, bookTitle, newDueDate })
+            body: JSON.stringify({ userId, bookTitle, duedate: newDueDate.toISOString() })
         }
       );
       
@@ -33,13 +34,14 @@ function CheckoutBook() {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault(); // Prevent the default form submission
-    fetchCheckoutBook(); // Fetch the book data
+    
 
     const newDueDate = new Date();
     newDueDate.setDate(newDueDate.getDate() + 14); // Add 14 days (2 weeks)
     setnewDueDate(newDueDate);
-    console.log("Book's due date is: " + newDueDate);
+    console.log(" THE Book's due date is: " + newDueDate);
 
+    fetchCheckoutBook(newDueDate); // Fetch the book data
     setBookTitle('');
     setuserId('');
   };

@@ -25,7 +25,7 @@ const Librarybook = new mongoose.Schema({       // Defining a Library book schem
     isbn: String,
     status: String,
     checkedout: Boolean,
-    duedate: String,
+    duedate: Date,
     checkedoutby: String,
 });
 
@@ -43,7 +43,7 @@ app.get('/', async (req, res) => {
 
 app.use('/books', bookRoutes);
 
-// Display all books as a JSON to the user
+// Display all books as a JSON to the user  // Initial test for backend functionality
 // app.get('/Library', async (req, res) => {
 //     try {
 //         // Query the books collection for all documents

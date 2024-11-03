@@ -17,9 +17,9 @@ function CheckinBook() {
             body: JSON.stringify({bookTitle}),
         })  
         const data = await response.json();
-        setBooks(data); // Set the books state with the response data
+        setBooks(data); 
         } catch (error) {
-        console.error('Error checking out the book:', error);
+        console.error('Error checking in the book:', error);
       } finally {
         setLoading(false); // Stop loading
       }
@@ -28,7 +28,7 @@ function CheckinBook() {
         // Handle form submission
         const handleSubmit = (e) => {
         e.preventDefault(); // Prevent the default form submission
-        fetchCheckinBook(); // Fetch the book data
+        fetchCheckinBook(); // Fetch the book's data
         setBookTitle('');
     };
 

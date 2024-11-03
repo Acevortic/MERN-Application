@@ -19,12 +19,12 @@ function AvailableBooks() {
 
 return (
     <div>
-        <h1>Available book list:</h1>
+        <h1>Available Books For Checkout:</h1>
             <button onClick={fetchAvailableBooks}> Show availablebooks</button>
             <ul>
         {books.map((book, index) => (
-          <li key={index}>
-            <strong> Title: {book.title}</strong> <strong>Author:</strong> {book.author} <strong>published by:</strong> {book.publisher}
+          <li key={index} style = {{marginBottom: '15px'}}>
+            <strong> Book's Title: </strong> {book.title} <strong>Author:</strong> {book.author} <strong>Published By:</strong> {book.publisher}
           </li>
         ))}
       </ul>

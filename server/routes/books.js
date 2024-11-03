@@ -29,13 +29,15 @@ router.get('/checkedoutbooks', async (req, res) => {
 
 router.post('/checkout', async (req, res) => {
     try {
-        const { userId, bookTitle } = req.body;
+        const { userId, bookTitle, duedate } = req.body;
 
         // Find the book by title and ensure it's not already checked out
         const book = await Book.findOne({ title: bookTitle, checkedout: false });
 
         console.log("User checking out: ", userId);
         console.log("Attempting to find the book:", bookTitle);
+        console.log("Book's new due date: ", duedate);
+        console.log(req.body);
 
         // If the book is already checked out or not found, return appropriate errors
         if (!book) {
@@ -49,8 +51,7 @@ router.post('/checkout', async (req, res) => {
                 checkedout: true,  // Set checked out status to true
                 status: "unavailable",
                 checkedoutby: userId,
-                // Set due date if needed (commented out here for now)
-                // duedate: returnDate.toDateString() 
+                duedate: duedate
             }, 
             { new: true }  // Return the updated document
         );
