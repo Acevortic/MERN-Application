@@ -8,15 +8,21 @@ import CheckinBook from './components/checkin'
 import CheckoutBook from './components/checkout'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [refresh, setRefresh] = useState(false);
+
+const handleRefresh = () => {
+    console.log("Triggering refresh in AvailableBooks");
+    setRefresh(prev => !prev);
+};
 
   return (
     <>
       <div>
-        <AvailableBooks />  
-          <CheckedoutBooks />
-            <CheckinBook />
-              <CheckoutBook />
+      <AvailableBooks refresh={refresh} />
+      <CheckedoutBooks refresh={refresh} />
+
+        <CheckinBook onRefresh={handleRefresh} />
+        <CheckoutBook onRefresh={handleRefresh} />
       </div>
     </>
   )

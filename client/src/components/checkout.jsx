@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CheckoutBook() {
+function CheckoutBook({ onRefresh }) {
   const [bookTitle, setBookTitle] = useState(''); // State for the book title input
   const [userId, setuserId] = useState('');
   const [books, setBooks] = useState([]); // State for the list of books
@@ -24,6 +24,7 @@ function CheckoutBook() {
       
       const data = await response.json();
       setBooks(data); // Set the books state with the response data
+      onRefresh();
     } catch (error) {
       console.error('Error checking out the book:', error);
     } finally {

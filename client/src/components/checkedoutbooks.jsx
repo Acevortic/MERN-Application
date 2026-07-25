@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
-function CheckedoutBooks() {
+function CheckedoutBooks({ refresh }) {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -9,14 +9,18 @@ function CheckedoutBooks() {
         try {
             const response = await fetch('http://localhost:3000/books/checkedoutbooks'); 
             const data = await response.json();
-            setBooks(data)
+            setBooks(data);
         } catch(error) {
             console.error("There was an error retrieving checkedoutbooks", error)
         } finally {
             setLoading(false);
         }
 
-    }
+    };
+
+    useEffect(() => {
+        fetchCheckedoutBooks();
+    }, [refresh]);
 
     return (
         <div>

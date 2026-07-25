@@ -1,6 +1,6 @@
 import react, {useState} from 'react';
 
-function CheckinBook() {
+function CheckinBook({ onRefresh }) {
     const [bookTitle, setBookTitle] = useState('');
     const [loading, setLoading] = useState(false);
     const [books, setBooks] = useState([]);
@@ -18,6 +18,7 @@ function CheckinBook() {
         })  
         const data = await response.json();
         setBooks(data); 
+        onRefresh();
         } catch (error) {
         console.error('Error checking in the book:', error);
       } finally {
@@ -55,7 +56,6 @@ function CheckinBook() {
             </button>
             </form>
         </div>
-
 
     )
 

@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 
-function AvailableBooks() {
+function AvailableBooks({ refresh }) {
     const [books, setBooks] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -16,6 +16,10 @@ function AvailableBooks() {
             setLoading(false);  // Stop loading once data is fetched
           }
         }
+
+      useEffect(() => {
+        fetchAvailableBooks();
+      }, [refresh]);
 
 return (
     <div>
